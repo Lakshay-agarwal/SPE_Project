@@ -34,13 +34,16 @@ router.route('/')
 
         const rooms = await features.query;
         
-        res.status(200).json({
-            status: 'success',
-            results: rooms.length,
-            data: {
-                rooms
-            }
-        });
+        // res.status(200).json({
+        //     status: 'success',
+        //     results: rooms.length,
+        //     data: {
+        //         rooms
+        //     }
+        // });
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(rooms);
     } catch (err) {
         res.status(404).json({
             status: 'fail',

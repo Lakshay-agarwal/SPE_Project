@@ -37,7 +37,7 @@ router.route('/')
         width : req.body.width,
         price : req.body.price,
         image : {
-            data : fs.readFileSync(path.join('/home/lakshay/Desktop/Courses/SPE/Project/server/' + '/images/' + req.file.filename))
+            data : fs.readFileSync(path.join(__dirname + '/images/' + req.file.filename))
         }
     }
 
@@ -46,7 +46,7 @@ router.route('/')
         console.log('Room uploaded ', room);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(obj);
+        res.json(room);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
