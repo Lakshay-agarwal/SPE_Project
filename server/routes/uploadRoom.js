@@ -30,6 +30,7 @@ const router = express.Router();
 router.route('/')
 .post(upload.single('image'), (req, res) => {
 
+    // print(req.file);
     var obj = {
         description :req.body.description,
         roomType : req.body.roomType,
@@ -37,7 +38,8 @@ router.route('/')
         width : req.body.width,
         price : req.body.price,
         image : {
-            data : fs.readFileSync(path.join('/home/lakshay/Desktop/Courses/SPE/Project/server/' + '/images/' + req.file.filename))
+            
+            data : fs.readFileSync(path.join('/home/mili/Documents/SPE_SEM7/Final_Project/SPE_Project/server' + '/images/' + req.file.filename))
         }
     }
 
@@ -46,7 +48,7 @@ router.route('/')
         console.log('Room uploaded ', room);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(obj);
+        res.json(room);
     }, (err) => next(err))
     .catch((err) => next(err));
 })

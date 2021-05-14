@@ -1,16 +1,51 @@
 import React, {Component} from "react"
 import { withRouter } from 'react-router-dom';
+import { loginUser } from "../actions/authAction";
+import PropTypes from "prop-types";
+// import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+// import createHistory from 'history/createBrowserHistory'
+
 
 class Login extends Component{
 
     state = {
-        username : "",
+        email : "",
         password : "",
+        errors : {}
     }
 
-    handleLogin = () => {
-        console.log(this.props)
-        this.props.history.push('/select');
+    componentDidMount() {
+        // If logged in and user navigates to Login page, should redirect them to dashboard
+        if (this.props.auth.isAuthenticated) {
+            // const history = createHistory();
+          this.props.history.push("/select");
+        }
+      }
+      
+
+    componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+        // const history = createHistory();
+        this.props.history.push("/select");
+    }
+    if (nextProps.errors) {
+        this.setState({
+          errors: nextProps.errors
+        });
+      }
+    }
+
+    onSubmit = (e) => {
+        // console.log(this.props)
+        e.preventDefault();
+        const userData = {
+            email: this.state.email,
+            password: this.state.password
+          };
+      
+        this.props.loginUser(userData);
+        // this.props.history.push('/select');
     }
 
     handleChange = (event) =>{
@@ -21,17 +56,26 @@ class Login extends Component{
         )
     }
     render(){
+        const { errors } = this.state;
         return(
             <main>
                 <h1> Login to your account </h1>
-                <form>
+                <form onSubmit={this.onSubmit}>
                     {/* Login<br /><br /> */}
-                        <input type="text" name = {"username"} value = {this.state.username} placeholder = {"username"} onChange = {this.handleChange} />
+                        <input type="text" name = {"email"} value = {this.state.email} placeholder = {"email"} onChange = {this.handleChange} />
+                        <span>
+                            {errors.email}
+                            {errors.emailnotfound}
+                        </span>
                         <br />
 
                         <input type="password" name = "password" value = {this.state.password} placeholder = {"password"} onChange = {this.handleChange} />
+                        <span>
+                            {errors.password}
+                            {errors.passwordincorrect}
+                        </span>
                         <br />
-                    <input type="button" value={'Login'} onClick={this.handleLogin}/><br />
+                    <button type = "submit">Login</button>
                 </form>
                 
             </main>            
@@ -40,5 +84,19 @@ class Login extends Component{
     }
 }
 
-export default withRouter(Login);
-// export default Login;
+Login.propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+  };    
+
+const mapStateToProps = state => ({
+auth: state.auth,
+errors: state.errors
+});
+
+export default withRouter(connect(
+    mapStateToProps,
+    { loginUser }
+  )(Login));
+// export default withRouter(Login);
