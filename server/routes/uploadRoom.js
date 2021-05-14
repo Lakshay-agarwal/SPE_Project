@@ -8,7 +8,7 @@ const Room = require("../models/Room");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'images');
+        cb(null, 'routes/images');
     },
 
     filename: (req, file, cb) => {
@@ -30,6 +30,7 @@ const router = express.Router();
 router.route('/')
 .post(upload.single('image'), (req, res) => {
 
+    // print(req.file);
     var obj = {
         description :req.body.description,
         roomType : req.body.roomType,
@@ -37,6 +38,7 @@ router.route('/')
         width : req.body.width,
         price : req.body.price,
         image : {
+            
             data : fs.readFileSync(path.join(__dirname + '/images/' + req.file.filename))
         }
     }

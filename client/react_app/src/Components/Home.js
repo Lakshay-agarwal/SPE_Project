@@ -20,7 +20,7 @@ class Home extends Component{
                 <br />
                 <br />
                 <br />
-                <Room source = {room} price = {3000} size = {"32 by 32"} description = "this is a very beatuful room and easy to create"/>
+                <Room source = {room} price = {3000} height = {"14"} width = {"14"} description = "this is a very beatuful room and easy to create"/>
             </div>
         )
     }
