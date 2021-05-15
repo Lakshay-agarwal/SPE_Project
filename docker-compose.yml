@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.3'
 
 services:
   server:
@@ -13,12 +13,12 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "5000:5000"
-    env_file: ./server/config/.env
+    env_file: ./server/config/dev.env
     networks:
       - app-network
   client:
     build:
-      context: ./client
+      context: ./client/react_app
       dockerfile: Dockerfile
     image: myapp-client
     container_name: myapp-react-client
