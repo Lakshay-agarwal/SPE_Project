@@ -5,6 +5,7 @@ const multer = require('multer');
 const fs = require("fs");
 const path = require("path");
 const Room = require("../models/Room");
+const logger = require("../logger");
 
 const router = express.Router();
 
@@ -46,6 +47,7 @@ router.route('/')
         //         rooms
         //     }
         // });
+        logger.info("Search successful !");
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(rooms)
@@ -54,6 +56,7 @@ router.route('/')
             status: 'fail',
             message: err
         });
+        logger.error("ERROR !");
     }
 });
 

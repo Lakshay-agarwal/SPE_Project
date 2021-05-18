@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
 const passport = require("passport");
+const logger = require("../logger");
 
 // Load input validation
 const validateRegisterInput = require("../validation/register");
@@ -22,13 +23,16 @@ router.post("/register", (req, res) => {
 
   // Check validation
   if (!isValid) {
+    logger.error("User not valid !")
     return res.status(400).json(errors);
   }
 
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
+      logger.error("User already exists !")
       return res.status(400).json({ email: "Email already exists" });
     } else {
+      logger.info("New user created");
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
@@ -60,6 +64,7 @@ router.post("/login", (req, res) => {
 
   // Check validation
   if (!isValid) {
+    logger.error("User not valid !");
     return res.status(400).json(errors);
   }
 
@@ -70,6 +75,7 @@ router.post("/login", (req, res) => {
   User.findOne({ email }).then(user => {
     // Check if user exists
     if (!user) {
+      logger.error("User not found");
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
 
@@ -97,7 +103,9 @@ router.post("/login", (req, res) => {
             });
           }
         );
+        logger.info("Login successful !");
       } else {
+        logger.error("Incorrect Password");
         return res
           .status(400)
           .json({ passwordincorrect: "Password incorrect" });

@@ -5,6 +5,7 @@ const multer = require('multer');
 const fs = require("fs");
 const path = require("path");
 const Room = require("../models/Room");
+const logger = require("../logger");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -46,6 +47,7 @@ router.route('/')
     Room.create(obj)
     .then((room) => {
         console.log('Room uploaded ', room);
+        logger.info("Room uploaded successfully");
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(room);

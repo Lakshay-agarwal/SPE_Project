@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const logger = require("./logger");
 
 const users = require("./routes/users");
 const uploadRooms = require("./routes/uploadRoom");
@@ -28,7 +29,9 @@ mongoose
     db,
     { useNewUrlParser: true }
   )
-  .then(() => console.log("MongoDB successfully connected"))
+  .then(() => { console.log("MongoDB successfully connected");
+                logger.info("MongoDB successfully connected !");
+  })
   .catch(err => console.log(err));
 
 // Passport middleware
@@ -44,4 +47,6 @@ app.use("/search", searchRooms);
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Server up and running on port ${port} !`));
+app.listen(port, () => {console.log(`Server up and running on port ${port} !`);
+                        logger.info(`Server up and running on port ${port} !`);
+  })
