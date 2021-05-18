@@ -2,8 +2,10 @@ import React, {Component} from 'react'
 // import { uploadRoom } from "../actions/uploadAction";
 import PropTypes from "prop-types";
 // import { connect } from "react-redux";
-// import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from "axios";
+import bg from  "../Images/purple2.jpg"
+import Dashboard from './Dashboard';
 
 class Upload extends Component{
 
@@ -66,24 +68,38 @@ class Upload extends Component{
         axios
       .post("http://localhost:5000/upload", formData)
       .then(/*res => history.push("/login")*/ res => console.log(res));
-        // this.props.history.push("/Search")
+        this.props.history.push("/Select")
 
     }
 
     render(){
         return(
-            <div>
-                <h1> Upload image of the room along with the following details </h1>
+            <div style={{ backgroundImage: `url("${bg}")`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+        }}>
+
+            <Dashboard />
+            <h1 style = {{textAlign: 'center', fontFamily: "Zapf Chancery, cursive", color:"#FFF0F5", fontSize: 30}}><b> Upload image of the room along with the following details </b></h1>
                 <div>
-                    <form>
-                        <input type="file" onChange={this.onFileChange} />
+                    {/* <div style = {{width: 20, border:15, padding: 50, margin:50}}> */}
+                    <form style = {{textAlign : "center", marginTop:50}}>
+                    {/* <div style = {{width : "auto", border: 100, borderStyle:"block", boxSizing: 'border-box'}}> */}
+                    {/* <div style ={{borderStyle:"solid", borderWidth:10, borderInlineWidth:5, paddingBlock:30, borderBlockColor:"#FFF0F5"}}> */}
+                    <div style = {{ontFamily: "Zapf Chancery, cursive", color:"#FFF0F5", paddingBlock:20}}>
+                        <span>Image of the room</span>
+                        <input style = {{paddingLeft:20}} type="file" onChange={this.onFileChange} />
                         <br />
+                        <div style = {{paddingBlock:30}}>
+                            <span>Price of the room </span>
                         <input type = "text" name = "price" value = {this.state.price} placeholder = "Enter the estimated price in Rs." onChange = {this.onChange} />
-                        <br />
-                        <span>Enter the size of the room </span>
+                        </div>
+                        <div className="input-field col s12">
+                        <div >Enter the size of the room </div>
                         <input type = "text" name = "width" value = {this.state.size} placeholder = "width (mts)" onChange = {this.onChange} />
                         <input type = "text" name = "height" value = {this.state.size} placeholder = "height (mts)" onChange = {this.onChange} />
-                        <br />
+                        </div>
                         <br />
                         <span> Room type </span>
                         <select name = "roomType" id = "roomType" onChange = {this.onChange} value = {this.state.roomType}>
@@ -97,9 +113,11 @@ class Upload extends Component{
                         <br />
                         <textarea rows = "20" cols = "50" id = "description"  name = "description" value = {this.state.description} placeholder = "Give some description abut the room" onChange = {this.onChange}/>
                         <br />
-                        <input type="button" value={'Submit'} onClick={this.handleUpload}/><br />
+                        <input type="button" value={'Submit'} onClick={this.handleUpload}/>
+                        </div>
+                        {/* </div> */}
                     </form>
-                    
+                    {/* </div> */}
                 </div>
             </div>
         )
@@ -114,4 +132,4 @@ Upload.propTypes = {
     auth: state.auth
   });
 
-  export default Upload
+  export default withRouter(Upload);

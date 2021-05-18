@@ -20,8 +20,13 @@ class APIfeatures {
         const excludefields = ['page', 'sort', 'limit'];
         excludefields.forEach(el => delete queryobj[el]);
         
-        let querystr = JSON.stringify(queryobj);
+        let querystr = JSON.stringify(queryobj); 
+        // console.log("the strigified version is " + querystr);
+        querystr = querystr.replace(/\\/g, "");
+        querystr = querystr.replace(/}"/g, "}");
+        querystr = querystr.replace(/"{/g, "{");
         querystr = querystr.replace(/\b(gte|gt|lt|lte)\b/g, match => `$${match}`);
+        // console.log("query string is " + querystr);
         this.query.find(JSON.parse(querystr));
         return this; 
     }

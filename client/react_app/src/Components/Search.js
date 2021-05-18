@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import Dashboard from './Dashboard'
 import axios from "axios";
 import List from "./List"
+import bg from  "../Images/purple2.jpg"
+import "./Select.css"
 
 class Search extends Component{
 
@@ -9,6 +11,17 @@ class Search extends Component{
         priceRange: "All",
         sizeRange : "All",
         rooms : []
+    }
+
+
+    componentDidMount(){
+        let query = {};
+        axios.get('http://localhost:5000/search', {params : query})
+        .then(res => {
+            const r = res.data;
+            this.setState({rooms: r});
+
+        })
     }
 
     onSelect = (event) =>{
@@ -88,11 +101,11 @@ class Search extends Component{
         {
             if(this.state.sizeRange === "All")
             {
-                query = {price : {gte : (5000), lt : (10000)}};
+                query = {price : {gte : 5000}};
             }
             else if(this.state.sizeRange === "Small")
             {
-                query = {price : {gte : (5000), lt : (10000)}, roomType : ("Small")};
+                query = {price : {gte : ('5000'), lt : ('10000')}, roomType : ("Small")};
             }
             else if(this.state.sizeRange === "Medium")
             {
@@ -124,8 +137,8 @@ class Search extends Component{
         }
 
         // console.log("the query is " + JSON.stringify(query));
-        axios.get('http://localhost:5000/search', {params : query}).
-        then(res => {
+        axios.get('http://localhost:5000/search', {params : query})
+        .then(res => {
             const r = res.data;
             this.setState({rooms: r});
 
@@ -133,17 +146,24 @@ class Search extends Component{
     }
     arrayBufferToBase64 = (buffer) => {
         var binary = '';
-        var bytes = [].slice.call(new Uint8Array(buffer));    bytes.forEach((b) => binary += String.fromCharCode(b));    
+        var bytes = [].slice.call(new Uint8Array(buffer));    
+        bytes.forEach((b) => binary += String.fromCharCode(b));    
         return window.btoa(binary);
     };
 
 
     render(){
         return(
-            <div>
+            <div style={{ backgroundImage: `url("${bg}")`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+        }}>
                 <Dashboard />
-                <h1>Room Designs for you</h1>
-                <span> Select Price Range </span>
+                <h1 style = {{textAlign: 'center', fontFamily: "Zapf Chancery, cursive", color:"#FFF0F5", fontSize: 50}}><b>Room Designs for you</b></h1>
+
+                <div style = {{textAlign: "center"}}>
+                <span style = {{color : "#FFF0F5", paddingRight : 10, fontSize : 20}}> Select Price Range </span>
                 <select name = "priceRange" id = "price" onChange = {this.onSelect} value = {this.state.priceRange}>
                     <option value = "All"> All </option>
                     <option value = "0 - 2000"> 0-2000 </option>
@@ -152,7 +172,8 @@ class Search extends Component{
                     <option value = "10000 and above"> 10000 and above </option>
                 </select>
 
-                <span> Select Size </span>
+                
+                <span style = {{color : "#FFF0F5", paddingRight : 10, paddingLeft : 10, fontSize : 20}}> Select Size </span>
                 <select name = "sizeRange" id = "size" onChange = {this.onSelect} value = {this.state.sizeRange}>
                     <option value = "All"> All </option>
                     <option value = "Small"> Small </option>
@@ -160,9 +181,9 @@ class Search extends Component{
                     <option value = "Large"> Large </option>
                 </select>    
                 <button style = {{margin : 70}} onClick = {this.onApply}> Apply </button>
+                </div>
                 <br />
-                <br />
-                {console.log("rooms are " + JSON.stringify(this.state.rooms))}
+                {/* {console.log("rooms are " + JSON.stringify(this.state.rooms))} */}
                 {/* <p> {this.state.rooms[0]}</p> */}
                 {/* Roooms {this.state.rooms[0]} */}
                 <List rooms_list = {this.state.rooms} />

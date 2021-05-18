@@ -11,19 +11,32 @@ class Dashboard extends Component{
         this.props.logoutUser();
         this.props.history.push("/login");
     }
+    onRegister = () =>{
+        this.props.history.push("/signUp");
+        // console.log("clicked");
+    }
+    onClick = () => {
+        this.props.history.push("/");
+    }
 
     render(){
         return(
-           <div>
-               {this.props.auth.isAuthenticated ? 
-               <div>
-                   <button onClick = {this.onLogout}>Logout</button>
-               </div>
-               :
-               <div>
-                   <button onclick = {this.onRegister}>Register</button>
-
-               </div>}
+            <div>
+                <div style = {{textAlign: 'left', padding:20, float:'left'}}>
+                <button onClick = {this.onClick}>Home</button>
+            </div>
+            <div style = {{textAlign : 'right', padding: 20}}>
+                {this.props.auth.isAuthenticated ? 
+                <div>
+                    <button onClick = {this.onLogout}>Logout</button>
+                </div>
+                :
+                <div>
+                    {/* {console.log("entered")} */}
+                    <button onClick = {this.onRegister}>Register</button>
+                </div>}
+                </div>
+            
             </div>
         )
     }

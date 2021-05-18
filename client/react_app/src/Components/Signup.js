@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../actions/authAction";
+import bg from  "../Images/yellow2.jpg"
+import Dashboard from "./Dashboard";
 
 class Signup extends Component{
 
@@ -82,28 +84,56 @@ class Signup extends Component{
     render(){
         const { errors } = this.state;
         return(
-            <main>
-                <h1> Register here </h1>
+          <div style={{ backgroundImage: `url("${bg}")`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            height:1000
+          }}>
+            <Dashboard />
+
+            <div className="col s12" style={{display: "flex", justifyContent:"center"}}>
+              <div className = "block-example border border-dark" style ={{marginTop:100, paddingInline:50, paddingBlock:70}}>
+              <h4 style = {{marginLeft : 70, color: "#4169e1", paddingBottom: 30}}>
+                <b>Register below </b>
+
+              
+
+              </h4>
                 <form onSubmit = {this.onSubmit}>
                     {/* Login<br /><br /> */}
+                    <div className="input-field col s12">
                         <input type="text" name = {"name"} value = {this.state.name} placeholder = {"name"} onChange = {this.handleChange} />
                         <span>{errors.name}</span>
-                        <br />
+                    </div>
+                    <div className="input-field col s12">
                         <input type="email" name = {"email"} value = {this.state.email} placeholder = {"email-id"} onChange = {this.handleChange} />
                         <span>{errors.email}</span>
-                        <br />
+                    </div>
+                    <div className="input-field col s12">
                         <input type="password" name = "password" value = {this.state.password} placeholder = {"password"} onChange = {this.handleChange} />
                         <span>{errors.password1}</span>
-                        <br />
+                    </div>
+                    <div className="input-field col s12">
                         <input type="password" name = "password2" value = {this.state.password2} placeholder = {"re-enter password"} onChange = {this.handleChange} />
                         <span>{errors.password2}</span>
-                        <br />
+                    </div>
                         {/* {console.log(this.state.password+" "+this.state.password2)} */}
                         {/* <FormErrors formErrors={this.state.formErrors} /> */}
-                    <button type = "submit"> Sign-up </button>
+                    <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                    <button style={{
+                      width: "280px",
+                      borderRadius: "3px",
+                      letterSpacing: "1.5px",
+                      marginTop: "1rem"
+                    }}
+                    type = "submit" className="btn btn-primary btn-block"> Sign-up </button>
+                    </div>
                 </form>
+                </div>
+                </div>
                 
-            </main>
+            </div>
         )
         }
 

@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
-
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { setCurrentUser, logoutUser } from "../actions/authAction";
 import { Provider } from "react-redux";
 import store from "../store";
