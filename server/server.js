@@ -40,6 +40,10 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 
+app.get('/',function(req,res) {
+  res.send("Server Running here !");
+});
+
 // Routes
 app.use("/users", users);
 app.use("/upload", uploadRooms);
