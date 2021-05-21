@@ -1,6 +1,7 @@
 var supertest = require("supertest");
 var should = require("should");
 const fs = require("fs");
+let expect = require("chai").expect;
 
 // This agent refers to PORT where the program is running.
 
