@@ -29,7 +29,6 @@ describe("Testing App",function(){
     describe("Register API", function(){
 
         it("Return successful on valid inputs",function(done){
-
           server
           .post("/users/register")
           .set('Content-Type', 'application/x-www-form-urlencoded')
