@@ -386,3 +386,13 @@ info: May-19-2021 18:10:01: 	Server up and running on port 5000 !
 info: May-19-2021 18:10:02: 	MongoDB successfully connected !
 info: May-19-2021 18:10:07: 	Server up and running on port 5000 !
 info: May-19-2021 18:10:08: 	MongoDB successfully connected !
+info: May-19-2021 20:22:36: 	Server up and running on port 5000 !
+info: May-19-2021 20:22:37: 	MongoDB successfully connected !
+info: May-19-2021 20:36:26: 	Server up and running on port 5000 !
+info: May-19-2021 20:36:27: 	MongoDB successfully connected !
+error: May-19-2021 20:36:36: 	User not valid !
+info: May-19-2021 20:36:36: 	Login successful !
+error: May-19-2021 20:36:36: 	User not found
+info: May-19-2021 20:36:36: 	Search successful !
+info: May-19-2021 21:07:00: 	Login successful !
+info: May-19-2021 21:07:10: 	Search successful !

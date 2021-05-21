@@ -28,17 +28,17 @@ describe("Testing App",function(){
 
     describe("Register API", function(){
 
-        // it("Return successful on valid inputs",function(done){
-        
-        //   server
-        //   .post("/users/register")
-        //   .set('Content-Type', 'application/x-www-form-urlencoded')
-        //   .send({ name: 'name', email: 'name2@gmail.com', password: 'password', password2: 'password' })
-        //   .end(function(err,res){
-        //     res.status.should.equal(200);
-        //     done();
-        //   });
-        // });
+        it("Return successful on valid inputs",function(done){
+
+          server
+          .post("/users/register")
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .send({ name: 'name', email: 'name3@gmail.com', password: 'password', password2: 'password' })
+          .end(function(err,res){
+            res.status.should.equal(200);
+            done();
+          });
+        });
         
         it("Return Unsuccessful on Invalid inputs",function(done){
         
