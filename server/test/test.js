@@ -20,7 +20,8 @@ describe("Testing App",function(){
           .expect(200) // THis is HTTP response
           .end(function(err,res){
             // HTTP status should be 200
-            res.status.should.equal(200);
+            // res.status.should.equal(200);
+            expect(res.status).to.equal(200);
             done();
           });
         });
@@ -28,16 +29,17 @@ describe("Testing App",function(){
 
     describe("Register API", function(){
 
-        it("Return successful on valid inputs",function(done){
-          server
-          .post("/users/register")
-          .set('Content-Type', 'application/x-www-form-urlencoded')
-          .send({ name: 'name', email: 'name3@gmail.com', password: 'password', password2: 'password' })
-          .end(function(err,res){
-            res.status.should.equal(200);
-            done();
-          });
-        });
+        // it("Return successful on valid inputs",function(done){
+        //   server
+        //   .post("/users/register")
+        //   .set('Content-Type', 'application/x-www-form-urlencoded')
+        //   .send({ name: 'name', email: 'name3@gmail.com', password: 'password', password2: 'password' })
+        //   .end(function(err,res){
+        //     // res.status.should.equal(200);
+        //     expect(res.status).to.equal(200);
+        //     done();
+        //   });
+        // });
         
         it("Return Unsuccessful on Invalid inputs",function(done){
         
@@ -46,7 +48,8 @@ describe("Testing App",function(){
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({ name: 'name', email: 'name1gmail.com', password: 'password', password2: 'password' })
             .end(function(err,res){
-              res.status.should.equal(400);
+              // res.status.should.equal(400);
+              expect(res.status).to.equal(400);
               done();
             });
           });
@@ -62,7 +65,8 @@ describe("Testing App",function(){
           .set('Content-Type', 'application/x-www-form-urlencoded')
           .send({ email: 'name@gmail.com', password: 'password'})
           .end(function(err,res){
-            res.status.should.equal(200);
+            // res.status.should.equal(200);
+            expect(res.status).to.equal(200);
             done();
           });
         });
@@ -74,7 +78,8 @@ describe("Testing App",function(){
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({ email: 'what@gmail.com', password: 'passw'})
             .end(function(err,res){
-              res.status.should.equal(404);
+              // res.status.should.equal(404);
+              expect(res.status).to.equal(404);
               done();
             });
           });
@@ -110,7 +115,8 @@ describe("Testing App",function(){
           .get("/search")
           .expect(200)
           .end(function(err,res){
-            res.status.should.equal(200);
+            // res.status.should.equal(200);
+            expect(res.status).to.equal(200);
             done();
           });
         });
